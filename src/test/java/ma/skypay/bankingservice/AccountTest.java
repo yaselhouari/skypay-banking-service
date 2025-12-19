@@ -93,4 +93,18 @@ class AccountTest {
         );
     }
 
+    @Test
+    void withdraw_invalidAmount_shouldThrowException() {
+        // Given
+        int invalidAmount = -500;
+
+        // When & Then
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> account.widthdraw(invalidAmount)
+        );
+
+        assertEquals("Withdrawal must be positive", exception.getMessage());
+    }
+
 }
