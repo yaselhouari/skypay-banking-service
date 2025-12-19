@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest {
@@ -69,13 +71,12 @@ class AccountTest {
         assertEquals("Insufficient balance", exception.getMessage());
     }
 
-    @Disabled("Print statement test temporarily ignored")
     @Test
     void printStatement_afterTransactions_shouldShowCorrectOrderAndBalance() {
         // Given
-        account.deposit(1000); // assume date handled in Transaction class or mocked
-        account.deposit(2000);
-        account.widthdraw(500);
+        account.deposit(1000, LocalDate.of(2012, 1, 10));
+        account.deposit(2000, LocalDate.of(2012, 1, 13));
+        account.widthdraw(500, LocalDate.of(2012, 1, 14));
 
         // When
         String statement = account.printStatementOutcome(); // returns statement as string

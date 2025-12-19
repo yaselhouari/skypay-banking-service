@@ -27,7 +27,7 @@ public class Account implements AccountService {
             throw new IllegalArgumentException("Deposit must be positive");
         }
         balance += amount;
-        transactions.add(new Transaction(date, -amount, balance));
+        transactions.add(new Transaction(date, amount, balance));
     }
 
     // Production withdraw (uses current date)
