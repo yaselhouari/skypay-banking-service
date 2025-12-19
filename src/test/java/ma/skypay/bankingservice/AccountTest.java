@@ -39,4 +39,17 @@ class AccountTest {
 
         assertEquals("Deposit must be positive", exception.getMessage());
     }
+
+    @Test
+    void withdraw_validAmount_shouldDecreaseBalance() {
+        // Given
+        account.deposit(2000);  // initial balance
+        int withdrawAmount = 500;
+
+        // When
+        account.widthdraw(withdrawAmount);
+
+        // Then
+        assertEquals(1500, account.getBalance());
+    }
 }
