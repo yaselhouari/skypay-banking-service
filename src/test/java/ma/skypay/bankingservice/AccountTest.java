@@ -52,4 +52,19 @@ class AccountTest {
         // Then
         assertEquals(1500, account.getBalance());
     }
+
+    @Test
+    void withdraw_moreThanBalance_shouldThrowException() {
+        // Given
+        account.deposit(1000);
+        int withdrawAmount = 1500;
+
+        // When & Then
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> account.widthdraw(withdrawAmount)
+        );
+
+        assertEquals("Insufficient balance", exception.getMessage());
+    }
 }
