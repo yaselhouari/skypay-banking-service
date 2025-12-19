@@ -25,4 +25,18 @@ class AccountTest {
         // Then
         assertEquals(1000, account.getBalance());
     }
+
+    @Test
+    void deposit_invalidAmount_shouldThrowException() {
+        // Given
+        int invalidAmount = -500;
+
+        // When & Then
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> account.deposit(invalidAmount)
+        );
+
+        assertEquals("Deposit must be positive", exception.getMessage());
+    }
 }
