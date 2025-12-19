@@ -19,7 +19,13 @@ public class Account implements AccountService {
 
     @Override
     public void widthdraw(int amount) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Withdrawal must be positive");
+        }
+        if (amount > balance) {
+            throw new IllegalArgumentException("Insufficient balance");
+        }
+        balance -= amount;
     }
 
     @Override
