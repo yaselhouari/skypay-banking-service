@@ -1,6 +1,7 @@
 package ma.skypay.bankingservice;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -67,4 +68,29 @@ class AccountTest {
 
         assertEquals("Insufficient balance", exception.getMessage());
     }
+
+    @Disabled("Print statement test temporarily ignored")
+    @Test
+    void printStatement_afterTransactions_shouldShowCorrectOrderAndBalance() {
+        // Given
+        account.deposit(1000); // assume date handled in Transaction class or mocked
+        account.deposit(2000);
+        account.widthdraw(500);
+
+        // When
+        String statement = account.printStatementOutcome(); // returns statement as string
+
+        // Then
+        String expected =
+                "Date || Amount || Balance\n" +
+                        "14/01/2012 || -500 || 2500\n" +
+                        "13/01/2012 || 2000 || 3000\n" +
+                        "10/01/2012 || 1000 || 1000";
+
+        assertEquals(
+                expected.replace("\r\n", "\n"),
+                statement.replace("\r\n", "\n")
+        );
+    }
+
 }
